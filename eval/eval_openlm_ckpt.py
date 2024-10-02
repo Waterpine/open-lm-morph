@@ -16,6 +16,7 @@ except ImportError:
     logging.warning("llmfoundry not installed. Please install llmfoundry `pip install llm-foundry` to run this script.")
 
 from omegaconf import OmegaConf as om
+from omegaconf import ListConfig, DictConfig
 from transformers import GPTNeoXTokenizerFast, LlamaTokenizerFast
 
 from open_lm.model import create_params
@@ -36,6 +37,19 @@ def setup_for_distributed(is_master):
     __builtin__.print = print
 
 
+def convert_config(icl_tasks):
+    # Check if the icl_tasks is a string (path) or a list of configurations
+    if isinstance(icl_tasks, str):
+        with open(icl_tasks, 'r') as f:
+            icl_tasks = om.load(f)
+
+    # Convert all elements in icl_tasks to Python dictionaries if they are DictConfig
+    if isinstance(icl_tasks, ListConfig) or isinstance(icl_tasks, list):
+        icl_tasks = [om.to_container(task, resolve=True) if isinstance(task, DictConfig) else task for task in
+                     icl_tasks]
+    return icl_tasks
+
+
 @torch.no_grad()
 def evaluate(model, tokenizer, cfg):
     cfg.dist_timeout = cfg.get("dist_timeout", 600.0)
@@ -46,8 +60,9 @@ def evaluate(model, tokenizer, cfg):
 
     composer_model = SimpleComposerOpenLMCausalLM(model, tokenizer)
 
+    icl_tasks = convert_config(cfg.icl_tasks)
     evaluators, logger_keys = build_icl_evaluators(
-        cfg.icl_tasks, tokenizer, cfg.max_seq_len, cfg.device_eval_batch_size
+        icl_tasks, tokenizer, cfg.max_seq_len, cfg.device_eval_batch_size
     )
 
     in_memory_logger = InMemoryLogger()  # track metrics in the in_memory_logger
