@@ -65,6 +65,8 @@ def train_one_epoch(
     sample_digits = math.ceil(math.log(dataloader.num_samples + 1, 10))
 
     losses_m = AverageMeter()
+    # To get the average train loss of one epoch
+    epoch_train_losses_m = AverageMeter()
     load_balancing_losses_m = AverageMeter()
     batch_time_m = AverageMeter()
     data_time_m = AverageMeter()
@@ -287,6 +289,7 @@ def train_one_epoch(
                 load_balancing_losses_m.update(total_load_balancing_loss.item(), batch_size)
             else:
                 losses_m.update(global_loss_tensor.item(), batch_size)
+                epoch_train_losses_m.update(global_loss_tensor.item(), batch_size)
             if averagers is not None and args.log_avg_model_training_loss and i % args.log_avg_model_training_loss == 0:
                 for key, value in total_loss_avg.items():
                     losses_avg_m[key].update(value.item(), batch_size)
@@ -299,11 +302,13 @@ def train_one_epoch(
                 # torch.distributed.all_gather(gathered_loss, total_loss)
 
                 # losses_m.update(sum(gathered_loss).item() / args.world_size, batch_size * args.world_size)
-                if args.moe_freq > 0:
-                    losses_m.update(global_loss_tensor.item() - total_load_balancing_loss.item(), batch_size)
-                    load_balancing_losses_m.update(total_load_balancing_loss.item(), batch_size)
-                else:
-                    losses_m.update(global_loss_tensor.item(), batch_size)
+
+                # The following is duplicate loss update
+                # if args.moe_freq > 0:
+                #     losses_m.update(global_loss_tensor.item() - total_load_balancing_loss.item(), batch_size)
+                #     load_balancing_losses_m.update(total_load_balancing_loss.item(), batch_size)
+                # else:
+                #     losses_m.update(global_loss_tensor.item(), batch_size)
                 samples_per_second = inputs.numel() * args.world_size / batch_time_m.val
                 samples_per_second_per_gpu = inputs.numel() / batch_time_m.val
                 loss_str = f"Loss: {losses_m.avg:.3f}"
@@ -314,6 +319,11 @@ def train_one_epoch(
                     f"Data (t): {data_time_m.avg:.3f} "
                     f"Batch (t): {batch_time_m.avg:.3f}, {samples_per_second:#g}/s, {samples_per_second_per_gpu:#g}/s/gpu "
                     f"LR: {optimizer.param_groups[0]['lr']:5f} "
+                )
+                logging.info(
+                    f"Train Loss (epoch): {epoch_train_losses_m.avg:.3f} "
+                    f"Train Loss (count): {epoch_train_losses_m.count:.3f} "
+                    f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
                 )
 
                 # Save train loss / etc. Using non avg meter values as loggers have their own smoothing
@@ -374,6 +384,11 @@ def train_one_epoch(
                     for k in averagers.avgs_dict.keys():
                         losses_avg_m[k].reset()
 
+    logging.info(
+        f"Train Loss (epoch): {epoch_train_losses_m.avg:.3f} "
+        f"Train Loss (count): {epoch_train_losses_m.count:.3f} "
+        f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
+    )
     # end for
     if tb_writer is not None:
         tb_writer.flush()
