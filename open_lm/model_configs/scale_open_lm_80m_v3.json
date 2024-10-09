@@ -1,7 +1,7 @@
 {
-    "hidden_dim": 1220,
-    "n_layers": 18,
-    "n_heads": 10,
+    "hidden_dim": 384,
+    "n_layers": 22,
+    "n_heads": 8,
     "seq_len": 2048,
     "vocab_size": 50432,
     "post_embed_norm": false,

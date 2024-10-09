@@ -1,6 +1,6 @@
 {
-    "hidden_dim": 1800,
-    "n_layers": 13,
+    "hidden_dim": 1344,
+    "n_layers": 26,
     "n_heads": 12,
     "seq_len": 2048,
     "vocab_size": 50432,
