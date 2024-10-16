@@ -320,11 +320,6 @@ def train_one_epoch(
                     f"Batch (t): {batch_time_m.avg:.3f}, {samples_per_second:#g}/s, {samples_per_second_per_gpu:#g}/s/gpu "
                     f"LR: {optimizer.param_groups[0]['lr']:5f} "
                 )
-                logging.info(
-                    f"Train Loss (epoch): {epoch_train_losses_m.avg:.3f} "
-                    f"Train Loss (count): {epoch_train_losses_m.count:.3f} "
-                    f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
-                )
 
                 # Save train loss / etc. Using non avg meter values as loggers have their own smoothing
                 log_data = {
@@ -384,11 +379,13 @@ def train_one_epoch(
                     for k in averagers.avgs_dict.keys():
                         losses_avg_m[k].reset()
 
-    logging.info(
-        f"Train Loss (epoch): {epoch_train_losses_m.avg:.3f} "
-        f"Train Loss (count): {epoch_train_losses_m.count:.3f} "
-        f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
-    )
+            logging.info(
+                f"Train Loss (epoch): {epoch_train_losses_m.avg:.3f}, "
+                f"Train Loss (value): {epoch_train_losses_m.val:.3f}, "
+                f"Train Loss (count): {epoch_train_losses_m.count:.3f}, "
+                f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
+            )
+
     # end for
     if tb_writer is not None:
         tb_writer.flush()
