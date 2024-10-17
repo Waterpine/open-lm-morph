@@ -23,7 +23,7 @@ try:
 except ImportError:
     wandb = None
 
-from open_lm.data import sample_chunk
+from open_lm.data import sample_chunk, get_wds_dataset
 from open_lm.distributed import is_master
 from open_lm.precision import get_autocast
 from open_lm.meters import AverageMeter
@@ -59,7 +59,11 @@ def train_one_epoch(
 
     model.train()
 
-    data["train"].set_epoch(epoch)  # set epoch in process safe manner via sampler or shared_epoch
+    # data["train"].set_epoch(epoch)  # set epoch in process safe manner via sampler or shared_epoch
+    # Consistency: train model for 2 epochs = train model for 1 epoch. Load checkpoint and train model for next epoch.
+    data["train"] = get_wds_dataset(
+        args, is_train=True, epoch=epoch, tokenizer=None, data_key=args.data_key, floor=False
+    )
     dataloader = data["train"].dataloader
     num_batches_per_epoch = dataloader.num_batches
     sample_digits = math.ceil(math.log(dataloader.num_samples + 1, 10))
@@ -102,6 +106,8 @@ def train_one_epoch(
             bf16=False,
         )
 
+    if args.rank == 0:
+        logging.info(f"FLAG start epoch: {epoch}")
     for i in itertools.count():
         if not args.skip_scheduler:
             scheduler(step)
@@ -385,6 +391,8 @@ def train_one_epoch(
                 f"Train Loss (count): {epoch_train_losses_m.count:.3f}, "
                 f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
             )
+    if args.rank == 0:
+        logging.info(f"FLAG end epoch: {epoch}")
 
     # end for
     if tb_writer is not None:
