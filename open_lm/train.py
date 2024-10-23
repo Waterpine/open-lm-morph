@@ -59,11 +59,14 @@ def train_one_epoch(
 
     model.train()
 
-    # data["train"].set_epoch(epoch)  # set epoch in process safe manner via sampler or shared_epoch
-    # Consistency: train model for 2 epochs = train model for 1 epoch. Load checkpoint and train model for next epoch.
-    data["train"] = get_wds_dataset(
-        args, is_train=True, epoch=epoch, tokenizer=None, data_key=args.data_key, floor=False
-    )
+    if args.dataset_manifest is not None:
+        data["train"].set_epoch(epoch)
+    else:
+        # data["train"].set_epoch(epoch)  # set epoch in process safe manner via sampler or shared_epoch
+        # Consistency: train model for 2 epochs = train model for 1 epoch. Load checkpoint and train model for next epoch.
+        data["train"] = get_wds_dataset(
+            args, is_train=True, epoch=epoch, tokenizer=None, data_key=args.data_key, floor=False
+        )
     dataloader = data["train"].dataloader
     num_batches_per_epoch = dataloader.num_batches
     sample_digits = math.ceil(math.log(dataloader.num_samples + 1, 10))
@@ -389,7 +392,8 @@ def train_one_epoch(
                 f"Train Loss (epoch): {epoch_train_losses_m.avg:.3f}, "
                 f"Train Loss (value): {epoch_train_losses_m.val:.3f}, "
                 f"Train Loss (count): {epoch_train_losses_m.count:.3f}, "
-                f"Train Loss (sum): {epoch_train_losses_m.sum:.3f} "
+                f"Train Loss (sum): {epoch_train_losses_m.sum:.3f}, "
+                f"LR: {optimizer.param_groups[0]['lr']:5f} "
             )
     if args.rank == 0:
         logging.info(f"FLAG end epoch: {epoch}")
