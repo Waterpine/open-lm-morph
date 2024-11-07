@@ -27,10 +27,11 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: agi_eval_sat_en
-  dataset_uri: local_data_llm_foundry/reading_comprehension/agi_eval_sat_en.jsonl # ADD YOUR OWN DATASET URI
+  label: triviaqa_sm_sub
+  dataset_uri: local_data_llm_foundry/world_knowledge/triviaqa_sm_sub.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
-  icl_task_type: multiple_choice
+  icl_task_type: generation_task_with_answers
+  do_normalization: true
 #  continuation_delimiter: 'continuation'
 #  continuation_delimiter: 'Answer: ' # this separates questions from answers
 #  has_categories: true

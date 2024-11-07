@@ -27,8 +27,8 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: agi_eval_sat_en
-  dataset_uri: local_data_llm_foundry/reading_comprehension/agi_eval_sat_en.jsonl # ADD YOUR OWN DATASET URI
+  label: bigbench_language_identification
+  dataset_uri: local_data_llm_foundry/language_understanding/bigbench_language_identification.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
   icl_task_type: multiple_choice
 #  continuation_delimiter: 'continuation'

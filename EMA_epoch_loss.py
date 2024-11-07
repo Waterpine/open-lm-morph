@@ -8,8 +8,8 @@ def exponential_moving_average(losses, alpha):
 def average(lst):
     return sum(lst) / len(lst)
 
-length = 1536
-filename = "logs/open_lm_ex_21272/out.log"
+length = 3136
+filename = "logs/open_lm_ex_178m_v2/out.log"
 train_loss_list = []
 with open(filename, 'r') as file:
     lines = file.readlines()

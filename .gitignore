@@ -149,6 +149,7 @@ experiments/
 
 # useless files
 try.py
+try_name.py
 .DS_Store
 
 # remove CI

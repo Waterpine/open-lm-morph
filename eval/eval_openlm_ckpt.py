@@ -1,5 +1,6 @@
 import argparse
 import builtins as __builtin__
+import os
 import time
 from typing import List
 
@@ -103,6 +104,7 @@ def evaluate(model, tokenizer, cfg):
             result = in_memory_logger.data[key][0][1].item()
             print(f"{key}: {result}")
 
+    return logger_keys, in_memory_logger
 
 def main():
     """
@@ -120,6 +122,7 @@ def main():
     parser.add_argument("--model", type=str, default="m1b_neox", help="Name of the model to use.")
     parser.add_argument("--eval-yaml")
     parser.add_argument("--tokenizer", type=str, default="EleutherAI/gpt-neox-20b")
+    parser.add_argument("--category", type=str, default="commonsense_reasoning")
     add_model_args(parser)
     args = parser.parse_args()
 
@@ -141,7 +144,17 @@ def main():
     open_lm.model.load_state_dict(state_dict)
     open_lm.model.eval()
 
-    evaluate(open_lm, tokenizer, eval_cfg)
+    model_name = args.checkpoint.split("/")[5]
+    epoch_num = int(args.checkpoint.split("/")[7].split("_")[1].split(".")[0])
+    dataset_name = args.eval_yaml.split("/")[1].split(".")[0]
+    logger_keys, in_memory_logger = evaluate(open_lm, tokenizer, eval_cfg)
+    os.makedirs("results", exist_ok=True)
+    os.makedirs(f"results/{args.category}", exist_ok=True)
+    for key in logger_keys:
+        if key in in_memory_logger.data:
+            result = in_memory_logger.data[key][0][1].item()
+            with open(f"results/{args.category}/{model_name}_epoch_{epoch_num}.txt", 'a') as file:
+                file.write(f"{key} {dataset_name}: {result}\n")
 
 
 if __name__ == "__main__":

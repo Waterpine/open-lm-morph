@@ -27,10 +27,12 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: agi_eval_sat_en
-  dataset_uri: local_data_llm_foundry/reading_comprehension/agi_eval_sat_en.jsonl # ADD YOUR OWN DATASET URI
+  label: agi_eval_sat_math
+  dataset_uri: local_data_llm_foundry/symbolic_problem_solving/agi_eval_sat_math.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
-  icl_task_type: multiple_choice
+  icl_task_type: generation_task_with_answers
+  cot_delimiter: " #### "
+  continuation_delimiter: "\nA: Let's think step by step. "
 #  continuation_delimiter: 'continuation'
 #  continuation_delimiter: 'Answer: ' # this separates questions from answers
 #  has_categories: true
