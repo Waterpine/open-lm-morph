@@ -27,7 +27,7 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: bigbench_repeat_copy_logic
+  label: bigbench_simple_arithmetic
   dataset_uri: local_data_llm_foundry/symbolic_problem_solving/bigbench_simple_arithmetic.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
   icl_task_type: language_modeling

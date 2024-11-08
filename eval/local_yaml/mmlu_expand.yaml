@@ -27,7 +27,7 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: mmlu
+  label: mmlu_expand
   dataset_uri: local_data_llm_foundry/world_knowledge/mmlu_expand.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
   icl_task_type: multiple_choice

@@ -27,7 +27,7 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: gsm8k
+  label: math_complex_soln
   dataset_uri: local_data_llm_foundry/symbolic_problem_solving/math_complex_soln.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
   icl_task_type: generation_task_with_answers
