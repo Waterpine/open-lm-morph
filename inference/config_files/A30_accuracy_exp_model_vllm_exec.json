@@ -1,0 +1,27 @@
+{
+    "V1": {
+        "num_hidden_layers": 28,
+        "hidden_size": 3072,
+        "n_heads": 16
+    },
+    "V2": {
+        "num_hidden_layers": 36,
+        "hidden_size": 2560,
+        "n_heads": 32
+    },
+    "V3": {
+        "num_hidden_layers": 60,
+        "hidden_size": 2048,
+        "n_heads": 16
+    },
+    "V4": {
+        "num_hidden_layers": 40,
+        "hidden_size": 2560,
+        "n_heads": 32
+    },
+    "V5": {
+        "num_hidden_layers": 20,
+        "hidden_size": 3584,
+        "n_heads": 32
+    }
+}

@@ -1,0 +1,502 @@
+{
+    "V1": {
+        "num_hidden_layers": 4,
+        "hidden_size": 4096,
+        "n_heads": 32
+    },
+    "V2": {
+        "num_hidden_layers": 8,
+        "hidden_size": 4096,
+        "n_heads": 32
+    },
+    "V3": {
+        "num_hidden_layers": 12,
+        "hidden_size": 4096,
+        "n_heads": 32
+    },
+    "V4": {
+        "num_hidden_layers": 16,
+        "hidden_size": 4096,
+        "n_heads": 32
+    },
+    "V5": {
+        "num_hidden_layers": 4,
+        "hidden_size": 4096,
+        "n_heads": 64
+    },
+    "V6": {
+        "num_hidden_layers": 8,
+        "hidden_size": 4096,
+        "n_heads": 64
+    },
+    "V7": {
+        "num_hidden_layers": 12,
+        "hidden_size": 4096,
+        "n_heads": 64
+    },
+    "V8": {
+        "num_hidden_layers": 16,
+        "hidden_size": 4096,
+        "n_heads": 64
+    },
+    "V9": {
+        "num_hidden_layers": 4,
+        "hidden_size": 4096,
+        "n_heads": 128
+    },
+    "V10": {
+        "num_hidden_layers": 8,
+        "hidden_size": 4096,
+        "n_heads": 128
+    },
+    "V11": {
+        "num_hidden_layers": 12,
+        "hidden_size": 4096,
+        "n_heads": 128
+    },
+    "V12": {
+        "num_hidden_layers": 16,
+        "hidden_size": 4096,
+        "n_heads": 128
+    },
+    "V13": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3584,
+        "n_heads": 32
+    },
+    "V14": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3584,
+        "n_heads": 32
+    },
+    "V15": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3584,
+        "n_heads": 32
+    },
+    "V16": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3584,
+        "n_heads": 32
+    },
+    "V17": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3584,
+        "n_heads": 56
+    },
+    "V18": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3584,
+        "n_heads": 56
+    },
+    "V19": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3584,
+        "n_heads": 56
+    },
+    "V20": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3584,
+        "n_heads": 56
+    },
+    "V21": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3584,
+        "n_heads": 112
+    },
+    "V22": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3584,
+        "n_heads": 112
+    },
+    "V23": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3584,
+        "n_heads": 112
+    },
+    "V24": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3584,
+        "n_heads": 112
+    },
+    "V25": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3840,
+        "n_heads": 32
+    },
+    "V26": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3840,
+        "n_heads": 32
+    },
+    "V27": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3840,
+        "n_heads": 32
+    },
+    "V28": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3840,
+        "n_heads": 32
+    },
+    "V29": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3840,
+        "n_heads": 40
+    },
+    "V30": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3840,
+        "n_heads": 40
+    },
+    "V31": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3840,
+        "n_heads": 40
+    },
+    "V32": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3840,
+        "n_heads": 40
+    },
+    "V33": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3840,
+        "n_heads": 48
+    },
+    "V34": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3840,
+        "n_heads": 48
+    },
+    "V35": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3840,
+        "n_heads": 48
+    },
+    "V36": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3840,
+        "n_heads": 48
+    },
+    "V37": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3840,
+        "n_heads": 120
+    },
+    "V38": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3840,
+        "n_heads": 120
+    },
+    "V39": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3840,
+        "n_heads": 120
+    },
+    "V40": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3840,
+        "n_heads": 120
+    },
+    "V41": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3072,
+        "n_heads": 32
+    },
+    "V42": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3072,
+        "n_heads": 32
+    },
+    "V43": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3072,
+        "n_heads": 32
+    },
+    "V44": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3072,
+        "n_heads": 32
+    },
+    "V45": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3072,
+        "n_heads": 24
+    },
+    "V46": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3072,
+        "n_heads": 24
+    },
+    "V47": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3072,
+        "n_heads": 24
+    },
+    "V48": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3072,
+        "n_heads": 24
+    },
+    "V49": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3072,
+        "n_heads": 16
+    },
+    "V50": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3072,
+        "n_heads": 16
+    },
+    "V51": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3072,
+        "n_heads": 16
+    },
+    "V52": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3072,
+        "n_heads": 16
+    },
+    "V53": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3072,
+        "n_heads": 48
+    },
+    "V54": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3072,
+        "n_heads": 48
+    },
+    "V55": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3072,
+        "n_heads": 48
+    },
+    "V56": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3072,
+        "n_heads": 48
+    },
+    "V57": {
+        "num_hidden_layers": 4,
+        "hidden_size": 3072,
+        "n_heads": 96
+    },
+    "V58": {
+        "num_hidden_layers": 8,
+        "hidden_size": 3072,
+        "n_heads": 96
+    },
+    "V59": {
+        "num_hidden_layers": 12,
+        "hidden_size": 3072,
+        "n_heads": 96
+    },
+    "V60": {
+        "num_hidden_layers": 16,
+        "hidden_size": 3072,
+        "n_heads": 96
+    },
+    "V61": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2560,
+        "n_heads": 32
+    },
+    "V62": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2560,
+        "n_heads": 32
+    },
+    "V63": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2560,
+        "n_heads": 32
+    },
+    "V64": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2560,
+        "n_heads": 32
+    },
+    "V65": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2560,
+        "n_heads": 40
+    },
+    "V66": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2560,
+        "n_heads": 40
+    },
+    "V67": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2560,
+        "n_heads": 40
+    },
+    "V68": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2560,
+        "n_heads": 40
+    },
+    "V69": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2560,
+        "n_heads": 80
+    },
+    "V70": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2560,
+        "n_heads": 80
+    },
+    "V71": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2560,
+        "n_heads": 80
+    },
+    "V72": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2560,
+        "n_heads": 80
+    },
+    "V73": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2048,
+        "n_heads": 32
+    },
+    "V74": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2048,
+        "n_heads": 32
+    },
+    "V75": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2048,
+        "n_heads": 32
+    },
+    "V76": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2048,
+        "n_heads": 32
+    },
+    "V77": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2048,
+        "n_heads": 64
+    },
+    "V78": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2048,
+        "n_heads": 64
+    },
+    "V79": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2048,
+        "n_heads": 64
+    },
+    "V80": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2048,
+        "n_heads": 64
+    },
+    "V81": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2048,
+        "n_heads": 16
+    },
+    "V82": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2048,
+        "n_heads": 16
+    },
+    "V83": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2048,
+        "n_heads": 16
+    },
+    "V84": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2048,
+        "n_heads": 16
+    },
+    "V85": {
+        "num_hidden_layers": 4,
+        "hidden_size": 2048,
+        "n_heads": 8
+    },
+    "V86": {
+        "num_hidden_layers": 8,
+        "hidden_size": 2048,
+        "n_heads": 8
+    },
+    "V87": {
+        "num_hidden_layers": 12,
+        "hidden_size": 2048,
+        "n_heads": 8
+    },
+    "V88": {
+        "num_hidden_layers": 16,
+        "hidden_size": 2048,
+        "n_heads": 8
+    },
+    "V89": {
+        "num_hidden_layers": 4,
+        "hidden_size": 1024,
+        "n_heads": 32
+    },
+    "V90": {
+        "num_hidden_layers": 8,
+        "hidden_size": 1024,
+        "n_heads": 32
+    },
+    "V91": {
+        "num_hidden_layers": 12,
+        "hidden_size": 1024,
+        "n_heads": 32
+    },
+    "V92": {
+        "num_hidden_layers": 16,
+        "hidden_size": 1024,
+        "n_heads": 32
+    },
+    "V93": {
+        "num_hidden_layers": 4,
+        "hidden_size": 1024,
+        "n_heads": 16
+    },
+    "V94": {
+        "num_hidden_layers": 8,
+        "hidden_size": 1024,
+        "n_heads": 16
+    },
+    "V95": {
+        "num_hidden_layers": 12,
+        "hidden_size": 1024,
+        "n_heads": 16
+    },
+    "V96": {
+        "num_hidden_layers": 16,
+        "hidden_size": 1024,
+        "n_heads": 16
+    },
+    "V97": {
+        "num_hidden_layers": 4,
+        "hidden_size": 1024,
+        "n_heads": 8
+    },
+    "V98": {
+        "num_hidden_layers": 8,
+        "hidden_size": 1024,
+        "n_heads": 8
+    },
+    "V99": {
+        "num_hidden_layers": 12,
+        "hidden_size": 1024,
+        "n_heads": 8
+    },
+    "V100": {
+        "num_hidden_layers": 16,
+        "hidden_size": 1024,
+        "n_heads": 8
+    }
+}

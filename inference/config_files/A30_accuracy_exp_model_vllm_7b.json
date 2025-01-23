@@ -1,0 +1,32 @@
+{
+    "V1": {
+        "num_hidden_layers": 32,
+        "hidden_size": 4096,
+        "n_heads": 32
+    },
+    "V2": {
+        "num_hidden_layers": 14,
+        "hidden_size": 6144,
+        "n_heads": 32
+    },
+    "V3": {
+        "num_hidden_layers": 8,
+        "hidden_size": 8192,
+        "n_heads": 32
+    },
+    "V4": {
+        "num_hidden_layers": 36,
+        "hidden_size": 3840,
+        "n_heads": 32
+    },
+    "V5": {
+        "num_hidden_layers": 40,
+        "hidden_size": 3584,
+        "n_heads": 32
+    },
+    "V6": {
+        "num_hidden_layers": 60,
+        "hidden_size": 3072,
+        "n_heads": 32
+    }
+}
