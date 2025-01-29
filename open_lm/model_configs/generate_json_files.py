@@ -87,6 +87,24 @@ data_dict_80M = {
         "post_embed_norm": False,
         "weight_tying": False
     },
+    '80m_v6': {
+        "hidden_dim": 448,
+        "n_layers": 13,
+        "n_heads": 8,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '80m_v7': {
+        "hidden_dim": 384,
+        "n_layers": 22,
+        "n_heads": 8,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
 }
 
 
@@ -141,6 +159,15 @@ data_dict_116M = {
         "weight_tying": False
     },
     '116m_v4': {
+        "hidden_dim": 880,
+        "n_layers": 3,
+        "n_heads": 10,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '116m_v5': {
         "hidden_dim": 560,
         "n_layers": 15,
         "n_heads": 10,
@@ -149,7 +176,7 @@ data_dict_116M = {
         "post_embed_norm": False,
         "weight_tying": False
     },
-    '116m_v5': {
+    '116m_v6': {
         "hidden_dim": 480,
         "n_layers": 24,
         "n_heads": 10,
@@ -223,6 +250,33 @@ data_dict_164M = {
     '164m_v5': {
         "hidden_dim": 960,
         "n_layers": 6,
+        "n_heads": 12,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '164m_v6': {
+        "hidden_dim": 1056,
+        "n_layers": 4,
+        "n_heads": 12,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '164m_v7': {
+        "hidden_dim": 1152,
+        "n_layers": 3,
+        "n_heads": 12,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '164m_v8': {
+        "hidden_dim": 672,
+        "n_layers": 18,
         "n_heads": 12,
         "seq_len": 2048,
         "vocab_size": 50432,
@@ -570,6 +624,81 @@ data_dict_712M = {
 }
 
 
+data_dict_1B = {
+    '1b_v1': {
+        "hidden_dim": 2048,
+        "n_layers": 24,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v2': {
+        "hidden_dim": 2304,
+        "n_layers": 20,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v3': {
+        "hidden_dim": 2560,
+        "n_layers": 16,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v4': {
+        "hidden_dim": 2432,
+        "n_layers": 20,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v5': {
+        "hidden_dim": 2688,
+        "n_layers": 16,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v6': {
+        "hidden_dim": 2816,
+        "n_layers": 12,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v7': {
+        "hidden_dim": 3072,
+        "n_layers": 16,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+    '1b_v8': {
+        "hidden_dim": 3072,
+        "n_layers": 12,
+        "n_heads": 16,
+        "seq_len": 2048,
+        "vocab_size": 50432,
+        "post_embed_norm": False,
+        "weight_tying": False
+    },
+}
+
 for key in data_dict_61M.keys():
     filename = f"scale_open_lm_{key}.json"
     with open(filename, 'w') as json_file:
@@ -694,4 +823,13 @@ for key in data_dict_712M.keys():
     assert data_dict_712M[key]["hidden_dim"] % data_dict_712M[key]["n_heads"] == 0
     assert data_dict_712M[key]["n_heads"] == 12
     assert data_dict_712M[key]["hidden_dim"] / data_dict_712M[key]["n_heads"] % 8 == 0
+
+for key in data_dict_1B.keys():
+    filename = f"scale_open_lm_{key}.json"
+    with open(filename, 'w') as json_file:
+        json.dump(data_dict_1B[key], json_file, indent=4)
+    assert data_dict_1B[key]["hidden_dim"] % data_dict_1B[key]["n_heads"] == 0
+    assert data_dict_1B[key]["n_heads"] == 16
+    assert data_dict_1B[key]["hidden_dim"] / data_dict_1B[key]["n_heads"] % 8 == 0
+
 
