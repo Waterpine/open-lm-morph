@@ -42,12 +42,12 @@ model_list = [
 
 gpu_id = 0
 # num_prompts = 8
-input_tokens = 128
+input_tokens = 1024
 output_tokens = 256
 # A100: 1, 2, 4, 8
 # A30: 1, 2, 4
 num_prompts_list = [1]
-gpu_type = "A100"
+gpu_type = "A30"
 
 if gpu_type == "A100":
     model_list.append("meta-llama/Llama-2-13b-hf")

@@ -26,7 +26,7 @@ login(token="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")
 
 cache_directory = "/users/Master/checkpoint"
 
-gpu_id = 0
+gpu_id = 2
 # num_prompts = 32
 input_tokens = 128
 output_tokens = 256
@@ -57,8 +57,8 @@ for num_prompts in num_prompts_list:
         config.num_hidden_layers = num_hidden_layers
         config.hidden_size = hidden_size
         config.intermediate_size = intermediate_size
-        config.num_attention_heads = 16
-        config.num_key_value_heads = 16
+        config.num_attention_heads = 24
+        config.num_key_value_heads = 24
         config.head_dim = config.hidden_size // config.num_attention_heads
         config.torch_dtype = torch.bfloat16
 

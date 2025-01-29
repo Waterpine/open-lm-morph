@@ -26,7 +26,7 @@ login(token="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")
 
 cache_directory = "/users/Master/checkpoint"
 
-gpu_id = 0
+gpu_id = 1
 # num_prompts = 32
 input_tokens = 128
 output_tokens = 256

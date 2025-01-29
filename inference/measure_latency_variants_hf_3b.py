@@ -29,10 +29,10 @@ os.makedirs("results_variants", exist_ok=True)
 
 gpu_id = 0
 # num_prompts = 8
-input_tokens = 128
-output_tokens = 256
+input_tokens = 1024
+output_tokens = 128
 num_prompts_list = [1]
-gpu_type = "A100"
+gpu_type = "A30"
 
 model_name = "meta-llama/Llama-2-7b-hf"
 
@@ -54,8 +54,8 @@ for num_prompts in num_prompts_list:
         config.num_hidden_layers = num_hidden_layers
         config.hidden_size = hidden_size
         config.intermediate_size = intermediate_size
-        config.num_attention_heads = 32
-        config.num_key_value_heads = 32
+        config.num_attention_heads = 24
+        config.num_key_value_heads = 24
         config.head_dim = config.hidden_size // config.num_attention_heads
         config.torch_dtype = torch.bfloat16
         model = LlamaForCausalLM(

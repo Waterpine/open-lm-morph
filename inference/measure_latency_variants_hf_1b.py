@@ -25,12 +25,12 @@ login(token="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")
 
 cache_directory = "/users/Master/checkpoint"
 
-gpu_id = 2
+gpu_id = 0
 # num_prompts = 32
-input_tokens = 128
-output_tokens = 256
+input_tokens = 1024
+output_tokens = 128
 num_prompts_list = [1]
-gpu_type = "A100"
+gpu_type = "A30"
 
 model_name = "meta-llama/Llama-2-7b-hf"
 
