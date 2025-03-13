@@ -17,7 +17,7 @@ model:
 
 load_path: # Add your (optional) Composer checkpoint path here!
 
-device_eval_batch_size: 8
+device_eval_batch_size: 4
 
 # FSDP config for model sharding
 fsdp_config:
@@ -27,10 +27,10 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: bigbench_movie_recommendation
-  dataset_uri: local_data_llm_foundry/world_knowledge/bigbench_movie_recommendation.jsonl # ADD YOUR OWN DATASET URI
+  label: bigbench_dyck_languages
+  dataset_uri: local_data_llm_foundry/symbolic_problem_solving/bigbench_dyck_languages.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
-  icl_task_type: multiple_choice
+  icl_task_type: language_modeling
 #  continuation_delimiter: 'continuation'
-  continuation_delimiter: 'Answer: ' # this separates questions from answers
+#  continuation_delimiter: 'Answer: ' # this separates questions from answers
 #  has_categories: true

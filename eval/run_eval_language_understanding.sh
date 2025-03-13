@@ -1,8 +1,8 @@
 # To set up the yaml file, please visit https://github.com/mosaicml/llm-foundry.
-export CUDA_VISIBLE_DEVICES=2
+export CUDA_VISIBLE_DEVICES=3
 
-MODEL_NAME=scale_open_lm_80m_v1
-CHECKPOINT_PATH=/home/song/open-lm-shape/logs/open_lm_ex_80m_v1/checkpoints/epoch_8.pt
+MODEL_NAME=scale_open_lm_313m_v4
+CHECKPOINT_PATH=/home/song/open-lm-shape/logs/open_lm_ex_313m_v4_40N/checkpoints/epoch_2.pt
 CATEGORY=language_understanding
 
 python eval_openlm_ckpt.py \

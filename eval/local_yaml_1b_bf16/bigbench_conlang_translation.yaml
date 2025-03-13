@@ -1,6 +1,6 @@
 max_seq_len: 2048
 seed: 1
-precision: fp32
+precision: amp_bf16
 
 # Tokenizer
 tokenizer:
@@ -27,10 +27,10 @@ fsdp_config:
 
 icl_tasks:
 -
-  label: bigbench_movie_recommendation
-  dataset_uri: local_data_llm_foundry/world_knowledge/bigbench_movie_recommendation.jsonl # ADD YOUR OWN DATASET URI
+  label: bigbench_conlang_translation
+  dataset_uri: local_data_llm_foundry/language_understanding/bigbench_conlang_translation.jsonl # ADD YOUR OWN DATASET URI
   num_fewshot: [0]
-  icl_task_type: multiple_choice
+  icl_task_type: language_modeling
 #  continuation_delimiter: 'continuation'
-  continuation_delimiter: 'Answer: ' # this separates questions from answers
+#  continuation_delimiter: 'Answer: ' # this separates questions from answers
 #  has_categories: true

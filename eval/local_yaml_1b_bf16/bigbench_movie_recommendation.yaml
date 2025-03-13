@@ -1,6 +1,6 @@
 max_seq_len: 2048
 seed: 1
-precision: fp32
+precision: amp_bf16
 
 # Tokenizer
 tokenizer:

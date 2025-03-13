@@ -1,0 +1,5 @@
+bash run_eval_commonsense_1b_bf16.sh
+bash run_eval_language_understanding_1b_bf16.sh
+bash run_eval_reading_comprehension_1b_bf16.sh
+#bash run_eval_safety_1b_bf16.sh
+#bash run_eval_world_knowledge_1b_bf16.sh
