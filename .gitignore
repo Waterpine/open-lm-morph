@@ -150,8 +150,48 @@ experiments/
 # useless files
 try.py
 try_name.py
+try_kill.py
 .DS_Store
 
 # remove CI
 .github/workflows
+
+# scaling project
+inference/A30
+inference/A100
+inference/results
+inference/results_vllm
+inference/results_variants
+inference/results_variants_vllm
+inference/results_layers
+inference/results_layers_vllm
+inference/results_hidden_size
+inference/results_hidden_size_vllm
+
+data.json
+try_dict.py
+
+inference/measure_tput_prod_hf.py
+inference/measure_tput_prod_vllm.py
+inference/measure_tput_variants_hf_1b.py
+inference/measure_tput_variants_hf_7b.py
+inference/measure_tput_variants_vllm_1b.py
+inference/measure_tput_variants_vllm_7b.py
+
+# laws
+law/all_fit_scaling_laws.py
+law/all_fit_scaling_laws_shape.py
+law/all_fit_scaling_laws_shape_square.py
+law/fit_scaling_laws_shape.py
+law/fit_scaling_laws_shape_more.py
+law/fit_scaling_laws_shape_split.py
+law/random_fit_scaling_laws.py
+law/random_fit_scaling_laws_more.py
+law/try_scaling_laws.py
+law/random_20N_partial_160N_data_fit/fit_scaling_laws.py
+law/random_20N_partial_160N_data_fit/fit_scaling_laws_shape.py
+law/random_20N_data_fit/
+
+eval/results
+eval/results_bf16
 

@@ -31,8 +31,8 @@ gpu_id = 0
 # num_prompts = 8
 input_tokens = 128
 output_tokens = 256
-num_prompts_list = [1]
-gpu_type = "A100"
+num_prompts_list = [128]
+gpu_type = "A30"
 
 model_name = "apple/DCLM-7B"
 
