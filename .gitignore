@@ -159,6 +159,7 @@ try_kill.py
 # scaling project
 inference/A30
 inference/A100
+inference/A100_rebuttal
 inference/results
 inference/results_vllm
 inference/results_variants

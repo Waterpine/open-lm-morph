@@ -1,4 +1,4 @@
-filename = "results/world_knowledge/open_lm_ex_80m_v1_epoch_1.txt"
+filename = "results/world_knowledge/open_lm_ex_80m_v7_40N_epoch_2.txt"
 
 task_list = []
 acc_list = []

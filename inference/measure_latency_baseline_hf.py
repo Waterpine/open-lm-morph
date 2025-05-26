@@ -22,6 +22,8 @@ def generate_random_sentence(sentence_length=256):
 
 login(token="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")
 
+cache_directory = "/home/sbian"
+
 model_list = [
     "facebook/opt-1.3b",
     "EleutherAI/pythia-1.4b-v0",
@@ -29,26 +31,30 @@ model_list = [
     "EleutherAI/gpt-neo-1.3B"
 ]
 
-gpu_id = 1
+gpu_id = 0
 # num_prompts = 8
-input_tokens = 1024
-output_tokens = 256
+input_tokens = 128
+output_tokens = 1
 # A100: 1, 2, 4, 8
 # A30: 1, 2, 4
-num_prompts_list = [32]
+num_prompts_list = [1, 2, 4, 8, 16, 32, 64, 128, 256]
 gpu_type = "A100"
 
-os.makedirs(f"{gpu_type}/results", exist_ok=True)
+os.makedirs(f"{gpu_type}_rebuttal/results", exist_ok=True)
 
 for num_prompts in num_prompts_list:
     for model_name in model_list:
         # 1. Load tokenizer and model
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_name,
+            cache_dir=cache_directory,
+        )
         if tokenizer.pad_token is None:
             tokenizer.add_special_tokens({'pad_token': '[PAD]'})
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            torch_dtype=torch.bfloat16
+            torch_dtype=torch.bfloat16,
+            cache_dir=cache_directory,
         )
         model.to(f"cuda:{gpu_id}")
 
@@ -90,7 +96,7 @@ for num_prompts in num_prompts_list:
             if total_tokens_generated_per_prompt == output_tokens:
                 trial += 1
                 with open(
-                    f"{gpu_type}/results/baseline_hf_latency_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
+                    f"{gpu_type}_rebuttal/results/baseline_hf_latency_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
                     'w'
                 ) as f:
                     f.write(f"Inference latency: {latency:.4f} seconds")

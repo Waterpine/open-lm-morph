@@ -24,15 +24,15 @@ def generate_random_sentence(sentence_length=256):
 
 login(token="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")
 
-cache_directory = "/users/Master/checkpoint"
+cache_directory = "/home/sbian"
 
 os.makedirs("results_dclm_variants", exist_ok=True)
 
-gpu_id = 2
+gpu_id = 0
 # num_prompts = 8
 input_tokens = 128
-output_tokens = 256
-num_prompts_list = [1]
+output_tokens = 1
+num_prompts_list = [1, 2, 4, 8, 16, 32, 64, 128, 256]
 gpu_type = "A100"
 
 model_name = "apple/DCLM-7B"
@@ -41,7 +41,7 @@ with open(f"config_files/{gpu_type}_dclm_variants_1b.json", "r") as file:
     json_str = file.read()
     parameter_dict = json.loads(json_str)
 
-os.makedirs(f"{gpu_type}/results_dclm_variants", exist_ok=True)
+os.makedirs(f"{gpu_type}_rebuttal/results_dclm_variants", exist_ok=True)
 
 for num_prompts in num_prompts_list:
     for variant in parameter_dict.keys():
@@ -113,7 +113,7 @@ for num_prompts in num_prompts_list:
             if total_tokens_generated_per_prompt == output_tokens:
                 trial += 1
                 with open(
-                    f"{gpu_type}/results_dclm_variants/variants_hf_latency_hs_{dim}_layers_{n_layers}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
+                    f"{gpu_type}_rebuttal/results_dclm_variants/variants_hf_latency_hs_{dim}_layers_{n_layers}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
                     'w'
                 ) as f:
                     f.write(f"Inference latency: {latency:.4f} seconds")

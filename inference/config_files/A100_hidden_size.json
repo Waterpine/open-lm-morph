@@ -11,18 +11,6 @@
         "num_hidden_layers": 12,
         "hidden_size": 1024
     },
-    "V4": {
-        "num_hidden_layers": 16,
-        "hidden_size": 1024
-    },
-    "V5": {
-        "num_hidden_layers": 20,
-        "hidden_size": 1024
-    },
-    "V6": {
-        "num_hidden_layers": 24,
-        "hidden_size": 1024
-    },
     "V7": {
         "num_hidden_layers": 4,
         "hidden_size": 2048
@@ -33,18 +21,6 @@
     },
     "V9": {
         "num_hidden_layers": 12,
-        "hidden_size": 2048
-    },
-    "V10": {
-        "num_hidden_layers": 16,
-        "hidden_size": 2048
-    },
-    "V11": {
-        "num_hidden_layers": 20,
-        "hidden_size": 2048
-    },
-    "V12": {
-        "num_hidden_layers": 24,
         "hidden_size": 2048
     },
     "V13": {
@@ -59,18 +35,6 @@
         "num_hidden_layers": 12,
         "hidden_size": 3072
     },
-    "V16": {
-        "num_hidden_layers": 16,
-        "hidden_size": 3072
-    },
-    "V17": {
-        "num_hidden_layers": 20,
-        "hidden_size": 3072
-    },
-    "V18": {
-        "num_hidden_layers": 24,
-        "hidden_size": 3072
-    },
     "V19": {
         "num_hidden_layers": 4,
         "hidden_size": 4096
@@ -81,18 +45,6 @@
     },
     "V21": {
         "num_hidden_layers": 12,
-        "hidden_size": 4096
-    },
-    "V22": {
-        "num_hidden_layers": 16,
-        "hidden_size": 4096
-    },
-    "V23": {
-        "num_hidden_layers": 20,
-        "hidden_size": 4096
-    },
-    "V24": {
-        "num_hidden_layers": 24,
         "hidden_size": 4096
     },
     "V25": {
@@ -107,18 +59,6 @@
         "num_hidden_layers": 12,
         "hidden_size": 5120
     },
-    "V28": {
-        "num_hidden_layers": 16,
-        "hidden_size": 5120
-    },
-    "V29": {
-        "num_hidden_layers": 20,
-        "hidden_size": 5120
-    },
-    "V30": {
-        "num_hidden_layers": 24,
-        "hidden_size": 5120
-    },
     "V31": {
         "num_hidden_layers": 4,
         "hidden_size": 6144
@@ -129,18 +69,6 @@
     },
     "V33": {
         "num_hidden_layers": 12,
-        "hidden_size": 6144
-    },
-    "V34": {
-        "num_hidden_layers": 16,
-        "hidden_size": 6144
-    },
-    "V35": {
-        "num_hidden_layers": 20,
-        "hidden_size": 6144
-    },
-    "V36": {
-        "num_hidden_layers": 24,
         "hidden_size": 6144
     },
     "V37": {
@@ -154,65 +82,5 @@
     "V39": {
         "num_hidden_layers": 12,
         "hidden_size": 8192
-    },
-    "V40": {
-        "num_hidden_layers": 16,
-        "hidden_size": 8192
-    },
-    "V41": {
-        "num_hidden_layers": 20,
-        "hidden_size": 8192
-    },
-    "V42": {
-        "num_hidden_layers": 24,
-        "hidden_size": 8192
-    },
-    "V43": {
-        "num_hidden_layers": 4,
-        "hidden_size": 10240
-    },
-    "V44": {
-        "num_hidden_layers": 8,
-        "hidden_size": 10240
-    },
-    "V45": {
-        "num_hidden_layers": 12,
-        "hidden_size": 10240
-    },
-    "V46": {
-        "num_hidden_layers": 16,
-        "hidden_size": 10240
-    },
-    "V47": {
-        "num_hidden_layers": 20,
-        "hidden_size": 10240
-    },
-    "V48": {
-        "num_hidden_layers": 24,
-        "hidden_size": 10240
-    },
-    "V49": {
-        "num_hidden_layers": 4,
-        "hidden_size": 12288
-    },
-    "V50": {
-        "num_hidden_layers": 8,
-        "hidden_size": 12288
-    },
-    "V51": {
-        "num_hidden_layers": 12,
-        "hidden_size": 12288
-    },
-    "V52": {
-        "num_hidden_layers": 16,
-        "hidden_size": 12288
-    },
-    "V53": {
-        "num_hidden_layers": 20,
-        "hidden_size": 12288
-    },
-    "V54": {
-        "num_hidden_layers": 24,
-        "hidden_size": 12288
     }
 }
