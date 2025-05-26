@@ -1,6 +1,8 @@
 # Morph
 
-![](/plots/morph.png)
+<img src="/plots/morph.png" width="200">
+
+[//]: # (![]&#40;/plots/morph.png&#41;)
 
 This repository contains the code for paper [Scaling Inference-Efficient Language Models (ICML'25)](https://arxiv.org/pdf/2501.18107). Our code is based on [OpenLM](https://github.com/mlfoundations/open_lm) and [DCLM-Morph](https://github.com/Waterpine/dclm-morph).
 
