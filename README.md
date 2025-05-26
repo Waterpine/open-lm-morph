@@ -1,6 +1,6 @@
 # Morph
 
-<img src="/plots/morph.png" width="200">
+<img src="/plots/morph.png" width="400">
 
 [//]: # (![]&#40;/plots/morph.png&#41;)
 
