@@ -116,8 +116,6 @@ We evaluate 1B models over the following datasets: arc_challenge, arc_easy, bool
 | Pythia-1.3B  | 2048        | 22           | 0.49        | 3.28            |
 | Neox-1.3B    | 2048        | 24           | 0.49        | 3.99            |
 | OPT-IML-1.3B | 2048        | 24           | 0.54        | 2.54            |
-| Morph-1B-v1  | 2048        | 24           | 0.52        | 3.61            |
-| Morph-1B-v2  | 2560        | 16           | 0.52        | 2.57            |
 | Morph-1B    | 3072        | 12           | 0.52        | 1.96            |
 
 ## Contributing
