@@ -22,7 +22,7 @@ def generate_random_sentence(sentence_length=256):
     return ' '.join(words)
 
 
-login(token="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")
+login(token="hf_key")
 
 cache_directory = "/home/sbian"
 

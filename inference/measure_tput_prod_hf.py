@@ -22,8 +22,10 @@ def generate_random_sentence(sentence_length=256):
 
 login(token="hf_key")
 
+os.makedirs("results", exist_ok=True)
 model_list = [
     "meta-llama/Llama-2-7b-hf",
+    "meta-llama/Llama-2-13b-hf",
     "meta-llama/Llama-3.2-1B",
     "meta-llama/Llama-3.2-3B",
     "meta-llama/Llama-3.1-8B",
@@ -31,6 +33,7 @@ model_list = [
     "Qwen/Qwen2.5-1.5B",
     "Qwen/Qwen2.5-3B",
     "Qwen/Qwen2.5-7B",
+    "Qwen/Qwen2.5-14B",
     "google/gemma-2b",
     "google/gemma-7b",
     "google/gemma-2-2b",
@@ -40,20 +43,13 @@ model_list = [
     "openbmb/MiniCPM-1B-sft-bf16"
 ]
 
-gpu_id = 0
+gpu_id = 3
 # num_prompts = 8
-input_tokens = 1024
+input_tokens = 128
 output_tokens = 256
 # A100: 1, 2, 4, 8
 # A30: 1, 2, 4
-num_prompts_list = [1]
-gpu_type = "A30"
-
-if gpu_type == "A100":
-    model_list.append("meta-llama/Llama-2-13b-hf")
-    model_list.append("Qwen/Qwen2.5-14B")
-
-os.makedirs(f"{gpu_type}/results", exist_ok=True)
+num_prompts_list = [1, 2, 4, 8]
 
 for num_prompts in num_prompts_list:
     for model_name in model_list:
@@ -110,21 +106,22 @@ for num_prompts in num_prompts_list:
                 )
             end_time = time.time()
 
-            latency = end_time - start_time
-            generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            # Calculate metrics
+            elapsed_time = end_time - start_time
+            total_tokens = outputs.shape[1]  # total tokens in the output
+            generated_tokens = (total_tokens - input_tokens) * outputs.shape[0]
+            throughput = generated_tokens / elapsed_time
 
-            total_tokens_generated_per_prompt = outputs.shape[1] - input_tokens
-            print(total_tokens_generated_per_prompt)
-
-            if total_tokens_generated_per_prompt == output_tokens:
+            print(generated_tokens)
+            if generated_tokens == int(output_tokens * num_prompts):
                 trial += 1
                 with open(
-                    f"{gpu_type}/results/prod_hf_latency_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
+                    f"results/prod_hf_tput_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
                     'w'
                 ) as f:
-                    f.write(f"Inference latency: {latency:.4f} seconds")
-                print(f"prod_hf_latency_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}")
-                print(f"Inference latency: {latency:.4f} seconds")
+                    f.write(f"Throughput: {throughput:.2f} tokens/sec")
+                print(f"prod_hf_tput_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}")
+                print(f"Throughput: {throughput:.2f} tokens/sec")
 
             if trial >= 5:
                 break

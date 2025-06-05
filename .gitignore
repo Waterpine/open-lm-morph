@@ -172,8 +172,6 @@ inference/results_hidden_size_vllm
 data.json
 try_dict.py
 
-inference/measure_tput_prod_hf.py
-inference/measure_tput_prod_vllm.py
 inference/measure_tput_variants_hf_1b.py
 inference/measure_tput_variants_hf_7b.py
 inference/measure_tput_variants_vllm_1b.py

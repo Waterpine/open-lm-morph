@@ -5,7 +5,7 @@ from transformers import (AutoModelForCausalLM,
 
 from huggingface_hub import login
 
-login(token="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")
+login(token="hf_key")
 
 cache_directory = "/users/Master/checkpoint"
 

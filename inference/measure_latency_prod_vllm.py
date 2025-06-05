@@ -21,7 +21,7 @@ def generate_random_sentence(sentence_length=256):
     return ' '.join(words)
 
 
-login(token="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")
+login(token="hf_key")
 
 model_list = [
     "meta-llama/Llama-2-7b-hf",

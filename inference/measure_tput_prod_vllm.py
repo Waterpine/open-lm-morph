@@ -3,8 +3,9 @@ import random
 import string
 import time
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 from huggingface_hub import login
+from vllm import LLM, SamplingParams
 
 
 def generate_random_sentence(sentence_length=256):
@@ -22,8 +23,10 @@ def generate_random_sentence(sentence_length=256):
 
 login(token="hf_key")
 
+os.makedirs("results_vllm", exist_ok=True)
 model_list = [
     "meta-llama/Llama-2-7b-hf",
+    "meta-llama/Llama-2-13b-hf",
     "meta-llama/Llama-3.2-1B",
     "meta-llama/Llama-3.2-3B",
     "meta-llama/Llama-3.1-8B",
@@ -31,6 +34,7 @@ model_list = [
     "Qwen/Qwen2.5-1.5B",
     "Qwen/Qwen2.5-3B",
     "Qwen/Qwen2.5-7B",
+    "Qwen/Qwen2.5-14B",
     "google/gemma-2b",
     "google/gemma-7b",
     "google/gemma-2-2b",
@@ -40,20 +44,13 @@ model_list = [
     "openbmb/MiniCPM-1B-sft-bf16"
 ]
 
-gpu_id = 0
-# num_prompts = 8
-input_tokens = 1024
+gpu_id = 1
+# num_prompts = 1
+input_tokens = 128
 output_tokens = 256
-# A100: 1, 2, 4, 8
-# A30: 1, 2, 4
-num_prompts_list = [1]
-gpu_type = "A30"
+num_prompts_list = [1, 2, 4, 8]
 
-if gpu_type == "A100":
-    model_list.append("meta-llama/Llama-2-13b-hf")
-    model_list.append("Qwen/Qwen2.5-14B")
-
-os.makedirs(f"{gpu_type}/results", exist_ok=True)
+os.environ["CUDA_VISIBLE_DEVICES"] = f"{gpu_id}"
 
 for num_prompts in num_prompts_list:
     for model_name in model_list:
@@ -65,26 +62,33 @@ for num_prompts in num_prompts_list:
             )
             if tokenizer.pad_token is None:
                 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-            model = AutoModelForCausalLM.from_pretrained(
-                model_name,
-                torch_dtype=torch.bfloat16,
+            model = LLM(
+                model=model_name,
+                tensor_parallel_size=1,
+                dtype=torch.bfloat16,
+                max_model_len=2048,
                 trust_remote_code=True
             )
-            model.to(f"cuda:{gpu_id}")
         else:
             tokenizer = AutoTokenizer.from_pretrained(model_name)
             if tokenizer.pad_token is None:
                 tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-            model = AutoModelForCausalLM.from_pretrained(
-                model_name,
-                torch_dtype=torch.bfloat16
+            model = LLM(
+                model=model_name,
+                tensor_parallel_size=1,
+                dtype=torch.bfloat16,
+                max_model_len=2048
             )
-            model.to(f"cuda:{gpu_id}")
+        sampling_params = SamplingParams(
+            min_tokens=5,
+            max_tokens=5,
+            temperature=0.8,
+            top_p=0.95
+        )
 
         # 2. Warm-up
-        warm_up_text = "Hello, this is a warm-up."
-        warm_up_inputs = tokenizer(warm_up_text, return_tensors="pt").to(f"cuda:{gpu_id}")
-        _ = model.generate(**warm_up_inputs, max_new_tokens=5)
+        warm_up_text = ["Hello, this is a warm-up."]
+        _ = model.generate(warm_up_text, sampling_params)
 
         trial = 0
         # 3. Measure latency
@@ -96,35 +100,42 @@ for num_prompts in num_prompts_list:
                 padding='max_length',
                 truncation=True,
                 return_tensors="pt"
-            ).to(f"cuda:{gpu_id}")
+            )
+            decoded_texts = [tokenizer.decode(ids, skip_special_tokens=True) for ids in input_ids['input_ids']]
+
+            sampling_params = SamplingParams(
+                min_tokens=output_tokens,
+                max_tokens=output_tokens,
+                temperature=0.8,
+                top_p=0.95
+            )
 
             start_time = time.time()
             with torch.inference_mode():
                 outputs = model.generate(
-                    **input_ids,
-                    min_new_tokens=output_tokens,
-                    max_new_tokens=output_tokens,
-                    do_sample=True,
-                    temperature=0.8,
-                    top_p=0.95
+                    decoded_texts,
+                    sampling_params
                 )
             end_time = time.time()
 
-            latency = end_time - start_time
-            generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            elapsed_time = end_time - start_time
+            total_tokens_generated_per_prompt = 0
+            generated_text = []
+            for output in outputs:
+                generated_text = output.outputs[0].token_ids
+                total_tokens_generated_per_prompt += len(generated_text)
+            throughput = total_tokens_generated_per_prompt / elapsed_time
+            print("total_tokens_generated_per_prompt:", total_tokens_generated_per_prompt)
 
-            total_tokens_generated_per_prompt = outputs.shape[1] - input_tokens
-            print(total_tokens_generated_per_prompt)
-
-            if total_tokens_generated_per_prompt == output_tokens:
+            if len(generated_text) == output_tokens:
                 trial += 1
                 with open(
-                    f"{gpu_type}/results/prod_hf_latency_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
+                    f"results_vllm/prod_vllm_tput_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}.txt",
                     'w'
                 ) as f:
-                    f.write(f"Inference latency: {latency:.4f} seconds")
-                print(f"prod_hf_latency_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}")
-                print(f"Inference latency: {latency:.4f} seconds")
+                    f.write(f"Throughput: {throughput:.2f} tokens/sec")
+                print(f"prod_vllm_{model_name.split('/')[1]}_bs_{num_prompts}_InputTokens_{input_tokens}_OutputTokens_{output_tokens}_trial_{trial}")
+                print(f"Throughput: {throughput:.2f} tokens/sec")
 
             if trial >= 5:
                 break
