@@ -174,8 +174,6 @@ try_dict.py
 
 inference/measure_tput_variants_hf_1b.py
 inference/measure_tput_variants_hf_7b.py
-inference/measure_tput_variants_vllm_1b.py
-inference/measure_tput_variants_vllm_7b.py
 
 # laws
 law/all_fit_scaling_laws.py
